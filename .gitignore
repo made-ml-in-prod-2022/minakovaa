@@ -78,6 +78,7 @@ target/
 
 # exclude data from source control by default
 /data/
+/docs/
 
 # Mac OS-specific storage files
 .DS_Store
@@ -88,3 +89,16 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# ML-flow runs information
+mlruns/
+
+# output data of models trainning
+models/*.pkl
+models/*.json
+outputs/*.json
+outputs/*.txt
+
+# Temp files
+try_mlflow.py
+text_for_PR.md

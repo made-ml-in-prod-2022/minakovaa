@@ -5,22 +5,41 @@ Homework_01 ML in production
 
 For train model using dataset from https://www.kaggle.com/datasets/cherngs/heart-disease-cleveland-uci
 
-
-Installation: 
+**Installation**: 
 ~~~
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ~~~
-Usage:
-~~~
-python ml_example/train_pipeline.py configs/train_config.yaml
-~~~
 
-Test:
-~~~
+**Usage**:
+
+**Train model**:
+```shell script
+python ml_project/train_pipeline.py CONFIG_PATH
+```
+for example:
+```shell script
+python ml_project/train_pipeline.py configs/train_config.yaml
+```
+
+**Predict target**:
+```shell script
+python ml_project/predict_pipeline.py [OPTIONS] MODEL_PATH PREDICTION_OUT_PATH FEATURES_TO_PREDICT_PATH
+```
+for example:
+```shell script
+python ml_project/predict_pipeline.py models/model.pkl outputs/preds.txt data/raw/test.csv
+```
+
+**Test**:
+```shell script
 pytest tests/
-~~~
+```
+
+
+Dataset can load with link https://drive.google.com/file/d/1PiBD7lFKmGgX8fuaaeN-Q8_kXhaeEErO/view?usp=sharing
+
 
 
 Project Organization
