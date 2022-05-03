@@ -1,4 +1,7 @@
 from typing import List
+import sys
+sys.path.append(".")
+
 from numpy import isclose
 
 from ml_project.data.make_dataset import read_data, split_train_test_data

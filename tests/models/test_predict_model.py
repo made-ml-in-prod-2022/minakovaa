@@ -1,5 +1,7 @@
 import os
 from typing import List
+import sys
+sys.path.append(".")
 
 from sklearn.neighbors import KNeighborsClassifier
 

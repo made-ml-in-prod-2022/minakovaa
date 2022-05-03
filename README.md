@@ -20,7 +20,7 @@ python ml_project/train_pipeline.py CONFIG_PATH
 ```
 for example:
 ```shell script
-python ml_project/train_pipeline.py configs/train_config.yaml
+python ml_project/train_pipeline.py configs/train_config_kNN.yaml
 ```
 
 **Predict target**:

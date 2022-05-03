@@ -1,6 +1,8 @@
 import os
 import logging
 import json
+import sys
+sys.path.append(".")
 
 import click
 

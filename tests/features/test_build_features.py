@@ -1,4 +1,6 @@
 from typing import List
+import sys
+sys.path.append(".")
 
 from sklearn.compose import ColumnTransformer
 from numpy import allclose

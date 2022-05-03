@@ -1,5 +1,7 @@
 import os
 from typing import List
+import sys
+sys.path.append(".")
 
 from ml_project.train_pipeline import run_train_pipeline
 from ml_project.enities.train_pipeline_params import TrainingPipelineParams
