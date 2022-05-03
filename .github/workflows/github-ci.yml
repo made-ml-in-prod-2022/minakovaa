@@ -25,8 +25,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Update PythonPath
-      run:
+      run: |
         export PYTHONPATH="${PYTHONPATH}:./minakovaa"
+        export PYTHONPATH="${PYTHONPATH}:./minakovaa/minakovaa"
+        export PYTHONPATH="${PYTHONPATH}:/home/runner/work/minakovaa/minakovaa"
+        echo PYTHONPATH
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
