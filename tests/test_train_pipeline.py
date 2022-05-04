@@ -12,7 +12,7 @@ from ml_project.enities.training_params import TrainingParams
 
 def test_run_train_pipeline(
         tmp_path,
-        dataset_path: str, test_size: float, random_state: int,
+        syntetic_dataset_path: str, test_size: float, random_state: int,
         target_col: str,
         categorical_features: List[str],
         numerical_features: List[str],
@@ -23,7 +23,7 @@ def test_run_train_pipeline(
     splitting_params = SplittingParams(test_size, random_state)
     train_params = TrainingParams(model_type="KNeighborsClassifier", model_params={"n_neighbors": 11},)
     training_pipeline_params = TrainingPipelineParams(
-        dataset_path,
+        syntetic_dataset_path,
         feature_params,
         output_model_path,
         output_metric_path,
@@ -35,5 +35,4 @@ def test_run_train_pipeline(
 
     assert path_to_model == output_model_path, "Saved path and expected path not equal"
     assert os.path.exists(path_to_model), "Model not saved"
-    assert metrics_test['accuracy'] > 0.83
-    assert metrics_test['f1_score'] > 0.75
+    assert metrics_test is not None

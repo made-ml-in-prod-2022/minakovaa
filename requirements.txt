@@ -4,3 +4,4 @@ pytest
 flake8
 marshmallow-dataclass
 scikit-learn
+Faker

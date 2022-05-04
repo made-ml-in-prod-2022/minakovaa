@@ -18,12 +18,12 @@ from ml_project.enities.feature_params import FeatureParams
 
 
 def test_transform_features_pipeline(
-        dataset_path: str, test_size: float, random_state: int,
+        syntetic_dataset_path: str, test_size: float, random_state: int,
         target_col: str,
         categorical_features: List[str],
         numerical_features: List[str],
 ):
-    df = read_data(dataset_path)
+    df = read_data(syntetic_dataset_path)
     split_params = SplittingParams(test_size=test_size, random_state=random_state)
     df_train, df_test = split_train_test_data(df, split_params)
 
