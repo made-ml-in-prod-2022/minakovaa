@@ -5,6 +5,7 @@ import sys
 sys.path.append(".")
 
 import click
+import mlflow
 
 from ml_project.data.make_dataset import (
     download_from_gdrive,
@@ -25,6 +26,7 @@ from ml_project.models.predict_model import (
     count_metrics,
     create_inference_pipeline,
     save_model,
+    load_model,
 )
 
 logger = logging.getLogger(__name__)
@@ -34,7 +36,26 @@ logger.setLevel(logging.INFO)
 def train_pipeline(config_path: str):
     training_pipeline_params = read_training_pipeline_params(config_path)
 
-    return run_train_pipeline(training_pipeline_params)
+    if training_pipeline_params.train_params.is_use_ml_flow:
+        logger.info("Run with mlflow")
+        with mlflow.start_run() as run:
+            path_to_model, metrics_test = run_train_pipeline(training_pipeline_params)
+
+            # Log parameters and metrics using the MLflow APIs
+            for name, param in training_pipeline_params.train_params.model_params.items():
+                mlflow.log_param(name, param)
+
+            mlflow.log_metrics(metrics_test)
+
+            model_loaded = load_model(path_to_model)
+            # Log the sklearn model and register as version 1
+            mlflow.sklearn.log_model(
+                sk_model=model_loaded,
+                artifact_path=path_to_model,
+                registered_model_name=training_pipeline_params.train_params.model_type
+            )
+    else:
+        return run_train_pipeline(training_pipeline_params)
 
 
 def run_train_pipeline(training_pipeline_params):

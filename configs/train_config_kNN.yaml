@@ -11,7 +11,8 @@ splitting_params:
 train_params:
   model_type: "KNeighborsClassifier"
   model_params:
-    n_neighbors: 25
+    n_neighbors: 5
+  is_use_ml_flow: True
 feature_params:
   categorical_features:
     - "sex"

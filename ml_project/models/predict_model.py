@@ -1,7 +1,7 @@
 import pickle
 
 import pandas as pd
-from sklearn.metrics import confusion_matrix, accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 
@@ -13,15 +13,15 @@ def create_inference_pipeline(model: SklearnClfModel, transformer: ColumnTransfo
 
 
 def count_metrics(predict_target: pd.Series, true_target: pd.Series):
-    confusion_mat = confusion_matrix(true_target, predict_target)
-
+    precision = precision_score(true_target, predict_target)
+    recall = recall_score(true_target, predict_target)
     accuracy = accuracy_score(true_target, predict_target)
-
     f1 = f1_score(true_target, predict_target)
 
     return {
-        "confusion_matrix": confusion_mat.tolist(),
         "accuracy": accuracy,
+        "precision": precision,
+        "recall": recall,
         "f1_score": f1
     }
 

@@ -102,3 +102,4 @@ outputs/*.txt
 # Temp files
 try_mlflow.py
 text_for_PR.md
+*.png
