@@ -77,11 +77,15 @@ def load_model_startup(model_path_arg=None):
     else:
         model_path = model_path_arg
 
+    print(model_path)
+
     if model_path is None:
         err = f"PATH_TO_MODEL is None"
         logger.error(err)
         raise RuntimeError(err)
-
+    print(os.listdir('./'))
+    print("_________________")
+    print(os.listdir('../'))
     if not os.path.exists(model_path):
         gdrive_id = os.getenv("GDRIVE_ID")
 
