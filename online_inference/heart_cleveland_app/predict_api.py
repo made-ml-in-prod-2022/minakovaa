@@ -47,7 +47,7 @@ async def health():
     if model is not None:
         return JSONResponse(content="model ready", status_code=200)
     else:
-        return JSONResponse(content="nodel not ready", status_code=500)
+        return JSONResponse(content="model not ready", status_code=500)
 
 
 def download_from_gdrive(gdrive_id, output_filepath):
@@ -62,8 +62,6 @@ def download_from_gdrive(gdrive_id, output_filepath):
         logger.error('ConnectionError. Dataset not downloaded.')
         return
 
-    # print('Download dataset from gdrive')
-
 
 def load_model(model_path) -> Pipeline:
     with open(model_path, "rb") as f:
@@ -72,23 +70,27 @@ def load_model(model_path) -> Pipeline:
 
 
 @app.on_event("startup")
-def load_model_startup():
+def load_model_startup(model_path_arg=None):
     global model
-    model_path = os.getenv("PATH_TO_MODEL")
+    if model_path_arg is None:
+        model_path = os.getenv("PATH_TO_MODEL")
+    else:
+        model_path = model_path_arg
+
+    if model_path is None:
+        err = f"PATH_TO_MODEL is None"
+        logger.error(err)
+        raise RuntimeError(err)
 
     if not os.path.exists(model_path):
         gdrive_id = os.getenv("GDRIVE_ID")
+
         if gdrive_id is None:
-            err = f"GDRIVE_ID {gdrive_id} is None"
+            err = f"GDRIVE_ID is None"
             logger.error(err)
             raise RuntimeError(err)
 
         download_from_gdrive(gdrive_id, model_path)
-
-    if model_path is None:
-        err = f"PATH_TO_MODEL {model_path} is None"
-        logger.error(err)
-        raise RuntimeError(err)
 
     model = load_model(model_path)
 

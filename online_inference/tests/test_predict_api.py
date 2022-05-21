@@ -1,14 +1,17 @@
+import os
+
 from fastapi.testclient import TestClient
 
 from ..heart_cleveland_app.predict_api import (
     app,
     load_model_startup,
     HeartClevelandModel,
-    HeartClevelandResponse,
 )
 
+PATH_TO_MODEL = "data/model.pkl"
+
 client = TestClient(app)
-load_model_startup()
+load_model_startup(PATH_TO_MODEL)
 
 
 def test_read_root_page():
