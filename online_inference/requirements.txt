@@ -1,0 +1,7 @@
+fastapi
+orjson
+uvicorn
+pydantic
+pandas
+scikit-learn==1.0.2
+gdown
