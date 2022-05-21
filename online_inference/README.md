@@ -23,8 +23,3 @@ docker run -p 8000:8000 minakovaa/online_inference::v2_gdrive
 You can download Docker image from dockerhub:
 
 https://hub.docker.com/repository/docker/minakovaa/online_inference
-
-
-docker push mikhailmar/batch_inference:v1
-
-docker run -e GDRIVE_ID=${GDRIVE_ID} mikhailmar/batch_inference:v1

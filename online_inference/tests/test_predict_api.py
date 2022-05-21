@@ -8,7 +8,7 @@ from ..heart_cleveland_app.predict_api import (
     HeartClevelandModel,
 )
 
-PATH_TO_MODEL = "data/model.pkl"
+PATH_TO_MODEL = "./data/model.pkl"
 
 client = TestClient(app)
 load_model_startup(PATH_TO_MODEL)
