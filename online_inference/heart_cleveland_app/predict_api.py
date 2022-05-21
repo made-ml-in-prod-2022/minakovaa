@@ -70,24 +70,23 @@ def load_model(model_path) -> Pipeline:
 
 
 @app.on_event("startup")
-def load_model_startup(model_path_arg=None):
+def load_model_startup(model_path_arg=None, gdrive_id_arg=None):
     global model
     if model_path_arg is None:
         model_path = os.getenv("PATH_TO_MODEL")
     else:
         model_path = model_path_arg
 
-    print(model_path)
-
     if model_path is None:
         err = f"PATH_TO_MODEL is None"
         logger.error(err)
         raise RuntimeError(err)
-    print(os.listdir('./'))
-    print("_________________")
-    print(os.listdir('../'))
+
     if not os.path.exists(model_path):
-        gdrive_id = os.getenv("GDRIVE_ID")
+        if gdrive_id_arg is None:
+            gdrive_id = os.getenv("GDRIVE_ID")
+        else:
+            gdrive_id = gdrive_id_arg
 
         if gdrive_id is None:
             err = f"GDRIVE_ID is None"
